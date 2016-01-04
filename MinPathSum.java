@@ -4,8 +4,7 @@ public class MinPathSum {
 	public static void main(String[] args) {
 		int[][] grid = {{8,2,0,0}, {1,1,1,1}, {4,7,8,2}};
 		int[][] m = new int[grid.length][grid[0].length];
-		System.out.println(grid.toString());
-		System.out.println(m.toString());
+		
 		int runningSum = 0;
 		for(int j = 0; j < grid[0].length; j++){
 			m[0][j] = runningSum + grid[0][j];
