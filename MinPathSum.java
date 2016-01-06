@@ -2,6 +2,7 @@
 public class MinPathSum {
 
 	public static void main(String[] args) {
+		// /*this is a // // comment */
 		int[][] grid = {{8,2,0,0}, {1,1,1,1}, {4,7,8,2}};
 		int[][] m = new int[grid.length][grid[0].length];
 		
