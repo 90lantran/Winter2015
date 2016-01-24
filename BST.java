@@ -104,6 +104,24 @@ public class BST {
 	}
 	
 	
+	public void printAllPaths(Node root){
+		printAllPaths(root, "");
+	}
+	
+	public void printAllPaths(Node root, String s){
+		if (root == null){
+			return;
+		}
+		s += root.value ;
+		if (root.left == null && root.right == null){
+			System.out.println(s);
+		} else {
+			printAllPaths(root.left, s + " " );
+			printAllPaths(root.right, s + " ");
+		}
+	}
+	
+	
 //	public List<List<Integer>> pathSum(Node root, int sum) {
 //		List<List<Integer>> list = new ArrayList<>();
 //		helper(root, sum, 0, list, new ArrayList<Integer>());
@@ -147,6 +165,8 @@ public class BST {
 		int max = bst.maxPathSum(bst.root);
 		List<List<Integer>> l2 = bst.path(bst.root, max);
 		System.out.println(l2.toString());
+		
+		bst.printAllPaths(bst.root);
 	}
 
 }
