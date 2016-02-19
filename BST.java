@@ -146,7 +146,17 @@ public class BST {
 //			helper(root.right, sum, currentSum, list, new ArrayList<>(path));
 //		}
 //	}
-
+	public static void increaseByOne(Node root){
+		
+		
+		if (root != null){
+			root.value = root.value +1;
+			increaseByOne(root.left);
+			increaseByOne(root.right);
+		}
+		
+	}
+	
 	public static void main(String[] args) {
 		BST bst = new BST();
 		bst.insert(5);
@@ -156,7 +166,8 @@ public class BST {
 		bst.insert(0);
 		bst.insert(7);
 		bst.insert(11);
-		bst.toString(bst.root);
+//		System.out.println("At the begining");
+//		bst.toString(bst.root);
 		System.out.println(bst.hasPathSum(bst.root, 37));
 		
 		List<List<Integer>> l = bst.path(bst.root, 26);
@@ -167,6 +178,14 @@ public class BST {
 		System.out.println(l2.toString());
 		
 		bst.printAllPaths(bst.root);
+		
+		System.out.println("At the begining:");
+		bst.toString(bst.root);
+		increaseByOne(bst.root);
+		System.out.println("After increasing: ");
+		bst.toString(bst.root);
+		
+		
 	}
 
 }
