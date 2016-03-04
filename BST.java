@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+import javax.naming.LimitExceededException;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
 
 public class BST {
@@ -157,6 +158,42 @@ public class BST {
 		
 	}
 	
+	public int max(){
+		
+		return maxHelper(0,0,root);
+	}
+	
+	public int maxHelper(int currentmax,int run, Node node){
+		if (node == null){
+			currentmax = currentmax >= run ? currentmax:run;
+		}else {
+			run += node.value;
+			currentmax =maxHelper(currentmax, run, node.left);
+			currentmax =maxHelper(currentmax, run,node.left);
+		}
+		return currentmax;
+	}
+	
+	public void limitPathSum(int limit){
+		root = limitPathSum(limit, root);
+	}
+	
+	public Node limitPathSum(int limit, Node node){
+		if (node == null || node.value > limit) {
+			node = null;
+			return node;
+		}
+	
+			
+		
+		limit = limit - node.value;
+		node.left = limitPathSum(limit, node.left);
+		node.right = limitPathSum(limit, node.right);
+		
+		return node;
+				
+	}
+	
 	public static void main(String[] args) {
 		BST bst = new BST();
 		bst.insert(5);
@@ -169,6 +206,8 @@ public class BST {
 //		System.out.println("At the begining");
 //		bst.toString(bst.root);
 		System.out.println(bst.hasPathSum(bst.root, 37));
+		
+		System.out.println(bst.max());
 		
 		List<List<Integer>> l = bst.path(bst.root, 26);
 		System.out.println(l.toString());
@@ -184,6 +223,40 @@ public class BST {
 		increaseByOne(bst.root);
 		System.out.println("After increasing: ");
 		bst.toString(bst.root);
+		
+		
+		System.out.println("testing limit pathSum");
+		BST tree = new BST();
+		Node a = tree.new Node(29);
+		Node b = tree.new Node(17);
+		Node c = tree.new Node(15);
+		Node d = tree.new Node(-7);
+		Node e = tree.new Node(37);
+		Node f = tree.new Node(11);
+		Node g = tree.new Node(12);
+		Node h = tree.new Node(16);
+		Node i = tree.new Node(4);
+		Node j = tree.new Node(14);
+		Node k = tree.new Node(-9);
+		Node m = tree.new Node(19);
+		
+		a.left = b;
+		a.right = c;
+		b.left = d;
+		b.right = e;
+		d.left = f;
+		d.right = g;
+		e.right = h;
+		
+		c.left = i;
+		c.right = j;
+		j.left = k;
+		j.right =m;
+		tree.root = a;
+		
+		tree.limitPathSum(28);
+		
+		tree.toString(tree.root);
 		
 		
 	}
